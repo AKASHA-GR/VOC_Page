@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VaultofCodes - Internships</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            animation: gradientShift 8s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            50% {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter : blur(20px);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .brand {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            animation: gradientAnimation 4s ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        @keyframes gradientAnimation {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .title {
+            font-size: 3rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 2px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scaleX(1); }
+            50% { transform: translateX(-50%) scaleX(1.2); }
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        .internships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .internship-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .internship-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            animation: gradientAnimation 3s ease infinite;
+        }
+
+        .internship-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card-details {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .card-details li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .card-details li::before {
+            content: '●';
+            color: #4ecdc4;
+            margin-right: 12px;
+            font-size: 1.2rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .card-details strong {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .view-details-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .view-details-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .view-details-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(45deg, #764ba2, #667eea);
+        }
+
+        .view-details-btn:hover::before {
+            left: 100%;
+        }
+
+        .view-details-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .brand {
+                font-size: 2rem;
+            }
+            
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .internships-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        /* Floating particles animation */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="brand">VaultofCodes</h1>
+            <h2 class="title">Internships</h2>
+            <p class="subtitle">Unlock Your Potential with Our Premium Programs</p>
+        </div>
+
+        <div class="internships-grid">
+            <div class="internship-card">
+                <h3 class="card-title">Web Development<br>Internship Program</h3>
+                <ul class="card-details">
+                    <li><strong>Duration:</strong> 1 month/2 months</li>
+                    <li><strong>Location:</strong> Virtual</li>
+                    <li><strong>Stipend:</strong> -</li>
+                    <li><strong>Start date:</strong> 05/11/2023</li>
+                </ul>
+                <button class="view-details-btn" onclick="window.open('https://www.google.com/search?q=web+development+internship+program&rlz=1C1CHBF_enIN1139IN1139&oq=Web+Development+Internship+Program&gs_lcrp=EgZjaHJvbWUqBwgAEAAYgAQyBwgAEAAYgAQyCAgBEAAYFhgeMggIAhAAGBYYHjIICAMQABgWGB4yCAgEEAAYFhgeMggIBRAAGBYYHjIICAYQABgWGB4yCAgHEAAYFhgeMggICBAAGBYYHjIICAkQABgWGB7SAQgxMTE0ajBqMagCCLACAfEFpFrCNvveeTs&sourceid=chrome&ie=UTF-8&zx=1757958867097&no_sw_cr=1', '_blank')">
+                    View Details
+                </button>
+            </div>
+
+            <div class="internship-card">
+                <h3 class="card-title">App Development<br>Internship Program</h3>
+                <ul class="card-details">
+                    <li><strong>Duration:</strong> 1 month/2 months</li>
+                    <li><strong>Location:</strong> Virtual</li>
+                    <li><strong>Stipend:</strong> -</li>
+                    <li><strong>Start date:</strong> 05/11/2023</li>
+                </ul>
+                <button class="view-details-btn" onclick="window.open('https://www.google.com/search?q=App+Development+Internship+Program&rlz=1C1CHBF_enIN1139IN1139&oq=App+Development+Internship+Program&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgWGB4yDQgCEAAYhgMYgAQYigUyDQgDEAAYhgMYgAQYigUyCggEEAAYgAQYogQyCggFEAAYgAQYogQyCggGEAAYgAQYogQyCggHEAAYgAQYogTSAQgyMDYyajBqMagCCLACAfEFPlqFssbCxUHxBT5ahbLGwsVB&sourceid=chrome&ie=UTF-8', '_blank')">
+                    View Details
+                </button>
+            </div>
+
+            <div class="internship-card">
+                <h3 class="card-title">Python Programming<br>Internship Program</h3>
+                <ul class="card-details">
+                    <li><strong>Duration:</strong> 1 month/2 months</li>
+                    <li><strong>Location:</strong> Virtual</li>
+                    <li><strong>Stipend:</strong> -</li>
+                    <li><strong>Start date:</strong> 05/11/2023</li>
+                </ul>
+                <button class="view-details-btn" onclick="window.open('https://www.google.com/search?q=Python+Programming+Internship+Program&rlz=1C1CHBF_enIN1139IN1139&oq=Python+Programming+Internship+Program&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgWGB4yCAgCEAAYFhgeMg0IAxAAGIYDGIAEGIoFMg0IBBAAGIYDGIAEGIoFMg0IBRAAGIYDGIAEGIoFMgoIBhAAGIAEGKIEMgoIBxAAGIAEGKIEMgcICBAAGO8FMgoICRAAGIAEGKIE0gEIMTYxNGowajGoAgiwAgHxBYN8DxNDAeIC&sourceid=chrome&ie=UTF-8', '_blank')">
+                    View Details
+                </button>
+            </div>
+
+            <div class="internship-card">
+                <h3 class="card-title">Java Programming<br>Internship Program</h3>
+                <ul class="card-details">
+                    <li><strong>Duration:</strong> 1 month/2months</li>
+                    <li><strong>Location:</strong> Virtual</li>
+                    <li><strong>Stipend:</strong> -</li>
+                    <li><strong>Start date:</strong> 05/11/2023</li>
+                </ul>
+                <button class="view-details-btn" onclick="window.open('https://www.google.com/search?q=Java+Programming+Internship+Program&rlz=1C1CHBF_enIN1139IN1139&oq=Java+Programming+Internship+Program&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgWGB4yCAgCEAAYFhgeMg0IAxAAGIYDGIAEGIoFMg0IBBAAGIYDGIAEGIoFMgoIBRAAGIAEGKIEMgoIBhAAGIAEGKIEMgoIBxAAGIAEGKIEMgoICBAAGIAEGKIE0gEHODI0ajBqMagCCLACAfEFt9b_caXA2L3xBbfW_3GlwNi9&sourceid=chrome&ie=UTF-8', '_blank')">
+                    View Details
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.width = Math.random() * 5 + 2 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            particle.style.animationDuration = Math.random() * 3 + 3 + 's';
+            document.body.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 6000);
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 300);
+
+        // Add click ripple effect
+        document.querySelectorAll('.view-details-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                ripple.style.borderRadius = '50%';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
